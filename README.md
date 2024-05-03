@@ -9,11 +9,12 @@
 ## 📮 미션 제출 방법
 
 - 미션 구현을 완료한 후 GitHub을 통해 제출해야 한다.
-  - GitHub을 활용한 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고해
-    제출한다.
-- GitHub에 미션을 제출한 후 [우아한테크코스 지원](https://apply.techcourse.co.kr) 사이트에 접속하여 프리코스 과제를 제출한다.
-  - 자세한 방법은 [제출 가이드](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse#제출-가이드) 참고
-  - **Pull Request만 보내고 지원 플랫폼에서 과제를 제출하지 않으면 최종 제출하지 않은 것으로 처리되니 주의한다.**
+  - GitHub을 활용한 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고해 제출한다.
+- Pull Request를 생성할 때, 반드시 아래 예시 이미지와 같이 `gdsc-skhu-pair-mission` 조직에 있는 저장소에 본인 **GitHub 아이디** 브랜치에 생성한다.
+  <img width="1233" alt="pull-request" src="https://github.com/hangillee/hangillee/assets/14046092/95d828e6-1de4-45ab-914a-97b090aa2771">
+- Pull Request를 생성한 후, PR의 리뷰어로 미리 배정된 리뷰어를 추가한다. 추가하고 나서, 디스코드의 리뷰 요청 채널에서 본인의 PR 알림의 답장으로 배정받은 리뷰어를 호출한다.
+  <br/><img width="331" alt="reviewer" src="https://github.com/hangillee/TIL/assets/14046092/4334e286-f7cc-46cc-9429-973d691805c7">
+  - 리뷰어 호출이 불가능한 경우, Discord 리뷰 요청 채널에서 직접 호출한다.
 
 ## 🚨 과제 제출 전 체크 리스트 - 0점 방지
 
@@ -159,7 +160,7 @@ BUILD SUCCESSFUL in 0s
 - 프로그램 종료 시 `System.exit()`를 호출하지 않는다.
 - 프로그램 구현이 완료되면 `ApplicationTest`의 모든 테스트가 성공해야 한다. **테스트가 실패할 경우 0점 처리한다.**
 - 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름을 수정하거나 이동하지 않는다.
-- indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
+- indent(인덴트, 들여쓰기) depth를 2가 넘지 않도록 구현한다. 1까지만 허용한다.
   - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
   - 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메서드)를 분리하면 된다.
 - 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
@@ -167,9 +168,9 @@ BUILD SUCCESSFUL in 0s
 
 ### 추가된 요구 사항
 
-- 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.
+- 함수(또는 메서드)의 길이가 10라인을 넘어가지 않도록 구현한다.
   - 함수(또는 메서드)가 한 가지 일만 잘 하도록 구현한다.
-- else를 지양한다.
+- else 예약어를 사용하지 않는다.
   - 힌트: if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
   - 때로는 if/else, when문을 사용하는 것이 더 깔끔해 보일 수 있다. 어느 경우에 쓰는 것이 적절할지 스스로 고민해 본다.
 - Enum 클래스를 적용해 프로그래밍을 구현한다.
@@ -208,11 +209,8 @@ class Lotto(private val numbers: List<Int>) {
 
 ---
 
-## ✏️ 과제 진행 요구 사항
-
-- 미션은 [kotlin-lotto-6](https://github.com/woowacourse-precourse/kotlin-lotto-6) 저장소를 Fork & Clone해
-  시작한다.
-- **기능을 구현하기 전 `docs/README.md`에 구현할 기능 목록을 정리**해 추가한다.
-- **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다.
-  - [커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 가이드를 참고해 커밋 메시지를 작성한다.
-- 과제 진행 및 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고한다.
+## 과제 진행 요구 사항
+- 미션은 [java-ladder](https://github.com/gdsc-skhu-pair-mission/kotlin-lotto) 저장소를 Fork & Clone해 시작한다.
+- README.md 파일에 구현할 기능 목록을 정리해 추가한다.
+- Git의 커밋 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
+  - [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 참고해 커밋 메시지를 작성한다.
