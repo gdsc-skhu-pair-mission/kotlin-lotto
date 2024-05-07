@@ -1,8 +1,30 @@
 package lotto.view
 
-private val PURCHASE_AMOUNT_MESSAGE = "로또 구입 금액을 입력해 주세요."
-private val NUMNER_MESSAGE = "당첨 번호를 입력해 주세요."
-private val BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요."
-class InputView {
+import camp.nextstep.edu.missionutils.Console
+import lotto.util.Validator.validateInteger
+import lotto.util.Validator.validateNatural
+import lotto.util.Validator.validateNull
 
+object InputView {
+    private const val SEPARATOR = ","
+
+    private fun getUserInput(): String = Console.readLine()
+
+    fun getInteger(): Int {
+        val input = getUserInput()
+        validateNull(input)
+        validateInteger(input)
+        validateNatural(input)
+        return input.toInt()
+    }
+
+    fun getWinningNumber(): List<Int> {
+        val winningNumber = getUserInput()
+        validateNull(winningNumber)
+        return winningNumber.split(SEPARATOR).map {
+            validateInteger(it)
+            validateNatural(it)
+            it.toInt()
+        }
+    }
 }
