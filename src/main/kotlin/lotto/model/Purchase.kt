@@ -2,8 +2,8 @@ package lotto.model
 
 import lotto.util.Validator.validateAmount
 
-class Purchase(private val price: Int) {
+class Ticket(private val amount: Int) {
     init {
-        validateAmount(price)
+        validateAmount(amount)
     }
 }
