@@ -11,4 +11,7 @@ class Lotto(private val numbers: List<Int>) {
         validateLottoDuplicate(numbers)
     }
 
+    fun getWinningNumbers(): List<Int> {
+        return numbers
+    }
 }
