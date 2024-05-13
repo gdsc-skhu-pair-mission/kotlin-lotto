@@ -9,17 +9,17 @@ class Tickets(private val purchase: Purchase) {
         private const val LOTTO_SIZE = 6
     }
 
-    private var _tickets: MutableList<List<Int>> = mutableListOf()
+    private var _lottoTickets: MutableList<List<Int>> = mutableListOf()
 
-    private val tickets: List<List<Int>>
-        get() = _tickets.toList()
+    val lottoTickets: List<List<Int>>
+        get() = _lottoTickets.toList()
 
     fun generateTickets(): List<List<Int>> {
         repeat(purchase.calculatePurchaseCount()) {
             val ticket = generateLottoNumbers()
             addTicket(ticket)
         }
-        return tickets
+        return lottoTickets
     }
 
     private fun generateLottoNumbers(): List<Int> {
@@ -27,6 +27,6 @@ class Tickets(private val purchase: Purchase) {
     }
 
     private fun addTicket(ticket: List<Int>) {
-        _tickets.add(ticket)
+        _lottoTickets.add(ticket)
     }
 }

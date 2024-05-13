@@ -6,7 +6,6 @@ import lotto.model.Rank
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
-import kotlin.math.exp
 
 class RankTest {
     private val lotto = Lotto(listOf(1,2,3,4,5,6))

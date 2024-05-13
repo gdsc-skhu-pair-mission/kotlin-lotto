@@ -1,7 +1,7 @@
 package lotto.view
 
 object OutputView {
-    private const val LOTTO_AMOUNT_MESSAGE = "로또 구입 금액을 입력해 주세요."
+    private const val LOTTO_AMOUNT_MESSAGE = "구입금액을 입력해 주세요."
     private const val PURCHASE_COUNT_MESSAGE = "개를 구매했습니다."
     private const val WINNING_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요."
     private const val BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요."
@@ -11,7 +11,7 @@ object OutputView {
     private const val RANK_5TH = "3개 일치 (5,000원) - "
     private const val RANK_4TH = "4개 일치 (50,000원) - "
     private const val RANK_3RD = "5개 일치 (1,500,000원) - "
-    private const val RANK_2ND = "5개 일치, 보너스 불 일치 (30,000,000원) - "
+    private const val RANK_2ND = "5개 일치, 보너스 볼 일치 (30,000,000원) - "
     private const val RANK_1ST = "6개 일치 (2,000,000,000원) - "
 
     private const val INDEX_1ST = 0
