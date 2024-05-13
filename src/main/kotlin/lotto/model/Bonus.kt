@@ -5,13 +5,14 @@ import lotto.util.Validator.validateLottoBonusDuplicate
 
 class Bonus (
     private val lotto: Lotto,
-    private val bonusNumber: Int
+    private val _bonusNumber: Int
 ) {
-    init {
-        validateBonusRange(bonusNumber)
-    }
 
-    fun checkDuplicateWithLotto() {
-        validateLottoBonusDuplicate(lotto.getWinningNumbers(), bonusNumber)
+    val bonusNumber: Int
+        get() = _bonusNumber
+
+    init {
+        validateBonusRange(_bonusNumber)
+        validateLottoBonusDuplicate(lotto.getWinningNumbers(), _bonusNumber)
     }
 }
