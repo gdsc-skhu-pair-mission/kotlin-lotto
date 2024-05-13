@@ -19,7 +19,7 @@ object Validator {
     }
 
     fun validateNatural(input: String){
-        require(input.trim().toInt() <= 0){
+        require(input.trim().toInt() > 0){
             ErrorMessage.NUMBER_NATURAL.getMessage()
         }
     }
