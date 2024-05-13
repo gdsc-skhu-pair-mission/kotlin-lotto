@@ -22,7 +22,6 @@ class BonusTest {
     fun should_ThrowException_When_Duplicate() {
         assertThrows<IllegalArgumentException> {
             val bonus = Bonus(lotto, 1)
-            bonus.checkDuplicateWithLotto()
         }
     }
 }
