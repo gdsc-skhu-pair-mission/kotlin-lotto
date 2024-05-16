@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 class RankingTest {
 
-    val winningTest = WinningTest()
+//    val winningTest = WinningTest()
     var ranking = 0
 
     @Test
