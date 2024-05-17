@@ -2,7 +2,7 @@ package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
 import kotlin.random.Random
-
+// Ticket 클래스 : 로또 숫자를 생성하는 메소드
 class Ticket{
     companion object {
         const val MIN_NUMBER = 1
