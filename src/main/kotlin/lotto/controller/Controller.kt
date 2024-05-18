@@ -8,20 +8,28 @@ import lotto.view.OutputView.printTicketMessage
 
 class Controller {
     private val ticketController = TicketController()
-
-    // 시작하는 컨트롤러
+    private val purchaseAmount = inputPurchaseAmount()
     fun start() {
-        val purchaseAmount = inputPurchaseAmount()
-        generateLottoTickets(purchaseAmount)
+        purchaseController()
+        inputWinningNumberCountroller()
+    }
 
+    fun purchaseController() : List<List<Int>> {
+        val purchaseAmount = purchaseAmount
+        val tickets =  generateLottoTickets(purchaseAmount)
+        return tickets
+    }
+    fun inputWinningNumberCountroller() {
         val winningNumbers = inputWinningNumbers()
         val bonusNumber = inputBonusNumber()
-        val rank = calculateRank(ticketController.tickets, winningNumbers, bonusNumber)
+        rankController(purchaseController(), winningNumbers, bonusNumber )
+    }
+    fun rankController(tickets : List<List<Int>>, winningNumbers: List<Int>, bonusNumber: Int) {
+        val rank = calculateRank(tickets, winningNumbers, bonusNumber)
         printStatistics(rank)
         printEarningsRate(rank, purchaseAmount)
     }
 
-    // 개수를 입력하는 메소드
     private fun inputPurchaseAmount(): Int {
         while (true) {
             try {
@@ -33,18 +41,14 @@ class Controller {
         }
     }
 
-    // 수량 만큼 로또 티켓들을 만드는 메소드
     private fun generateLottoTickets(purchaseAmount: Int): List<List<Int>> {
         val purchase = Purchase(purchaseAmount)
-        OutputView.printPurchaseCountMessage(purchase.calculatePurchaseCount())
-        //    val tickets = Tickets(purchase)
+        printPurchaseCountMessage(purchase.calculatePurchaseCount())
         val tickets = ticketController.generateTickets(purchase)
-        // val lottoTickets = ticketControler.generateTickets()
-        OutputView.printTicketMessage(ticketController.tickets)
+        printTicketMessage(ticketController.tickets)
         return tickets
     }
 
-    // 당첨 번호 입력하는 메소드
     private fun inputWinningNumbers(): List<Int> {
         while (true) {
             try {
@@ -56,7 +60,6 @@ class Controller {
         }
     }
 
-    // 보너스 번호 입력하는 메소드
     private fun inputBonusNumber(): Int {
         while (true) {
             try {
@@ -68,7 +71,6 @@ class Controller {
         }
     }
 
-    // 순위 계산하는 메소드
     private fun calculateRank(lottoTickets: List<List<Int>>, winningNumbers: List<Int>, bonusNumber: Int): Rank {
         val lotto = Lotto(winningNumbers)
         val bonus = Bonus(lotto, bonusNumber)
@@ -77,12 +79,10 @@ class Controller {
         return rank
     }
 
-    // 현재 랭크 출력하는 메소드
     private fun printStatistics(rank: Rank) {
         OutputView.printStatistics(rank.rankList)
     }
 
-    // 수익률을 출력하는 메소드
     private fun printEarningsRate(rank: Rank, purchaseAmount: Int) {
         val prize = Prize(rank)
         val prizeRate = prize.getRate(prize.getPrizeMoney(), purchaseAmount)
