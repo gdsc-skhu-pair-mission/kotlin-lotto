@@ -19,11 +19,13 @@ class Controller {
         val tickets =  generateLottoTickets(purchaseAmount)
         return tickets
     }
+
     fun inputWinningNumberCountroller() {
         val winningNumbers = inputWinningNumbers()
         val bonusNumber = inputBonusNumber()
         rankController(purchaseController(), winningNumbers, bonusNumber )
     }
+
     fun rankController(tickets : List<List<Int>>, winningNumbers: List<Int>, bonusNumber: Int) {
         val rank = calculateRank(tickets, winningNumbers, bonusNumber)
         printStatistics(rank)

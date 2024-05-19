@@ -1,6 +1,8 @@
 package lotto
 
+import lotto.controller.TicketController
 import lotto.model.Purchase
+import lotto.model.Ticket
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -8,8 +10,9 @@ import org.junit.jupiter.api.Assertions.assertTrue
 
 class TicketsTest {
     private val purchase = Purchase(3000)
-    private val tickets = Tickets(purchase)
-    private val ticketsList = tickets.generateTickets()
+    private val ticket = Ticket()
+    private val ticketController = TicketController()
+    private val ticketsList = ticketController.generateTickets(purchase)
 
     @Test
     @DisplayName("각 로또의 로또 번호는 6개씩 생성되어야 한다.")
@@ -20,7 +23,7 @@ class TicketsTest {
     @Test
     @DisplayName("각 로또의 로또 번호는 1부터 45 사이의 숫자여야 한다.")
     fun generateTickets_NumbersInEachTicketsShouldBeBetween1And45() {
-        assertTrue(ticketsList.all { it -> it.all { it in 1..45 }})
+        assertTrue(ticketsList.all { it -> it.all { it in 1..45 } })
     }
 
     @Test

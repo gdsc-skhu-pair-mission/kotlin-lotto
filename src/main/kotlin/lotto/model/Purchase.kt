@@ -10,7 +10,9 @@ class Purchase(private val amount: Int) {
     init {
         validateAmount(amount)
     }
-
+    fun purchaseAmount() : Int{
+        return amount;
+    }
     fun calculatePurchaseCount(): Int {
         return amount / LOTTO_PRICE
     }
