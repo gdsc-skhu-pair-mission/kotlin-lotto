@@ -11,7 +11,7 @@ class BonusTest {
 
     @Test
     @DisplayName("보너스 번호는 1부터 45 사이여야 한다.")
-    fun should_ThrowException_When_OutOfRange() {
+    fun should_throwException_when_outOfRange() {
         assertThrows<IllegalArgumentException> {
             Bonus(lotto, 46)
         }
@@ -19,7 +19,7 @@ class BonusTest {
 
     @Test
     @DisplayName("보너스 번호는 당첨 번호와 중복되지 않아야 한다.")
-    fun should_ThrowException_When_Duplicate() {
+    fun should_throwException_when_duplicate() {
         assertThrows<IllegalArgumentException> {
             val bonus = Bonus(lotto, 1)
         }

@@ -1,9 +1,6 @@
 package lotto
 
-import lotto.model.Bonus
-import lotto.model.Lotto
-import lotto.model.Prize
-import lotto.model.Rank
+import lotto.model.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -15,11 +12,12 @@ class PrizeTest {
     private val tickets = listOf(listOf(1,2,3,7,8,9), listOf(1,2,3,4,10,11), listOf(11,12,13,14,15,16), listOf(17,18,19,20,21,22), listOf(23,24,25,26,27,28))
 
     private val rank = Rank(lotto, bonus)
-    private val prize = Prize(rank)
+    private val purchase = Purchase(5000)
+    private val prize = Prize(rank, purchase)
 
     @Test
     @DisplayName("당첨 순위에 따른 올바른 금액을 반환한다.")
-    fun when_Given_Rank_Then_ReturnCorrectPrizeMoney() {
+    fun when_given_rank_then_returnCorrectPrizeMoney() {
         rank.calculateRank(tickets)
         val prizeMoney = prize.getPrizeMoney()
         val expectedPrizeMoney = 55000
@@ -28,10 +26,9 @@ class PrizeTest {
 
     @Test
     @DisplayName("당첨 금액에 따른 올바른 수익률을 반환한다.")
-    fun when_Given_Prize_Then_ReturnCorrectRate() {
+    fun when_given_prize_then_returnCorrectRate() {
         rank.calculateRank(tickets)
-        val prizeMoney = prize.getPrizeMoney()
-        val rate = prize.getRate(prizeMoney, 5000)
+        val rate = prize.getRate(prize.getPrizeMoney())
         val expectedRate = "1100.0"
         assertEquals(rate, expectedRate)
     }

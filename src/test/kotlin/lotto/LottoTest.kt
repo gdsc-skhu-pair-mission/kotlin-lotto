@@ -10,7 +10,7 @@ import org.junit.jupiter.api.assertThrows
 class LottoTest {
     @Test
     @DisplayName("로또 번호는 중복되지 않아야 한다.")
-    fun should_ThrowException_When_Duplicate() {
+    fun should_throwException_when_duplicate() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
         }
@@ -18,7 +18,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 번호는 1부터 45 사이여야 한다.")
-    fun should_ThrowException_When_OutOfRange() {
+    fun should_throwException_when_outOfRange() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 45, 46))
         }
@@ -26,7 +26,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 번호는 6개여야 한다.")
-    fun should_ThrowException_When_OutOfSize() {
+    fun should_throwException_when_outOfSize() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5))
         }
