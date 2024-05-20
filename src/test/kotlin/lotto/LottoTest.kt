@@ -1,24 +1,34 @@
 package lotto
 
+import lotto.model.Lotto
+import net.bytebuddy.pool.TypePool.Resolution.Illegal
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 
 class LottoTest {
     @Test
-    fun `로또 번호의 개수가 6개가 넘어가면 예외가 발생한다`() {
-        assertThrows<IllegalArgumentException> {
-            Lotto(listOf(1, 2, 3, 4, 5, 6, 7))
-        }
-    }
-
-    // TODO: 이 테스트가 통과할 수 있게 구현 코드 작성
-    @Test
-    fun `로또 번호에 중복된 숫자가 있으면 예외가 발생한다`() {
+    @DisplayName("로또 번호는 중복되지 않아야 한다.")
+    fun should_throwException_when_duplicate() {
         assertThrows<IllegalArgumentException> {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
         }
     }
 
-    // 아래에 추가 테스트 작성 가능
+    @Test
+    @DisplayName("로또 번호는 1부터 45 사이여야 한다.")
+    fun should_throwException_when_outOfRange() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 45, 46))
+        }
+    }
+
+    @Test
+    @DisplayName("로또 번호는 6개여야 한다.")
+    fun should_throwException_when_outOfSize() {
+        assertThrows<IllegalArgumentException> {
+            Lotto(listOf(1, 2, 3, 4, 5))
+        }
+    }
 }
