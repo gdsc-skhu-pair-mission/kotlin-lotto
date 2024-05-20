@@ -1,5 +1,7 @@
 package lotto.model
 
+import lotto.dto.RankDTO
+
 class Rank(
     private val lotto: Lotto,
     private val bonus: Bonus,
@@ -23,13 +25,17 @@ class Rank(
         private const val COUNT_THREE = 3
     }
 
-    fun calculateRank(tickets: List<List<Int>>) {
+    fun convertToRankDTO(): RankDTO {
+        return RankDTO(rankList)
+    }
+
+    fun calculateRank(lottoTickets: List<List<Int>>) {
         val winningNumbers = lotto.getWinningNumbers()
         val bonusNumber = bonus.bonusNumber
 
-        tickets.forEach { ticket ->
-            val matchCount = ticket.count { it in winningNumbers }
-            val rankIndex = getRankIndex(matchCount, ticket.contains(bonusNumber))
+        lottoTickets.forEach { lottoTicket ->
+            val matchCount = lottoTicket.count { it in winningNumbers }
+            val rankIndex = getRankIndex(matchCount, lottoTicket.contains(bonusNumber))
             _rankList[rankIndex]++
         }
     }

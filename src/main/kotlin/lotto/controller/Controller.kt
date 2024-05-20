@@ -3,76 +3,99 @@ package lotto.controller
 import lotto.model.*
 import lotto.view.InputView
 import lotto.view.OutputView
+import net.bytebuddy.asm.Advice.OffsetMapping.Factory.Illegal
 
 class Controller {
     fun start() {
-        val purchaseAmount = inputPurchaseAmount()
-        val tickets = generateLottoTickets(purchaseAmount)
-        val winningNumbers = inputWinningNumbers()
-        val bonusNumber = inputBonusNumber()
-        val rank = calculateRank(tickets, winningNumbers, bonusNumber)
-        printStatistics(rank)
-        printEarningsRate(rank, purchaseAmount)
+        val purchase = inputPurchaseAmount()
+        val tickets = generateLottoTickets(purchase)
+        val lotto = inputWinningNumbers()
+        val bonus = inputBonusNumber(lotto)
+        val rank = calculateRank(tickets, lotto, bonus)
+        showStatistics(rank)
+        showEarningsRate(rank, purchase)
     }
 
-    private fun inputPurchaseAmount(): Int {
-        while(true) {
-            try {
-                OutputView.printAmountMessage()
-                return InputView.getInteger()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
+    private fun inputPurchaseAmount(): Purchase {
+        fun attemptInput(): Int {
+            return tryGettingPurchaseAmount() ?: run {
+                attemptInput()
             }
+        }
+        return Purchase(attemptInput())
+    }
+
+    private fun tryGettingPurchaseAmount(): Int? {
+        return try {
+            OutputView.printAmountMessage()
+            InputView.getInteger()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            null
         }
     }
 
-    private fun generateLottoTickets(purchaseAmount: Int): List<List<Int>> {
-        val purchase = Purchase(purchaseAmount)
+    private fun generateLottoTickets(purchase: Purchase): Tickets {
         OutputView.printPurchaseCountMessage(purchase.calculatePurchaseCount())
         val tickets = Tickets(purchase)
-        val lottoTickets = tickets.generateTickets()
-        OutputView.printTicketMessage(lottoTickets)
-        return lottoTickets
+        val ticketsDTO = tickets.convertToTicketsDTO()
+        OutputView.printTicketMessage(ticketsDTO.lottoTickets)
+        return tickets
     }
 
-    private fun inputWinningNumbers(): List<Int> {
-        while(true) {
-            try {
-                OutputView.printWinningNumberMessage()
-                return InputView.getWinningNumber()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
+    private fun inputWinningNumbers(): Lotto {
+        fun attemptInput(): List<Int> {
+            return tryGettingWinningNumbers() ?: run {
+                attemptInput()
             }
+        }
+        return Lotto(attemptInput())
+    }
+
+    private fun tryGettingWinningNumbers(): List<Int>? {
+        return try {
+            OutputView.printWinningNumberMessage()
+            InputView.getWinningNumber()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            null
         }
     }
 
-    private fun inputBonusNumber(): Int {
-        while(true) {
-            try {
-                OutputView.printBonusNumberMessage()
-                return InputView.getInteger()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
+    private fun inputBonusNumber(lotto: Lotto): Bonus {
+        fun attemptInput(): Int {
+            return tryGettingBonusNumber() ?: run {
+                attemptInput()
             }
+        }
+        return Bonus(lotto, attemptInput())
+    }
+
+    private fun tryGettingBonusNumber(): Int? {
+        return try {
+            OutputView.printBonusNumberMessage()
+            InputView.getInteger()
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            null
         }
     }
 
-    private fun calculateRank(lottoTickets: List<List<Int>>, winningNumbers: List<Int>, bonusNumber: Int): Rank {
-        val lotto = Lotto(winningNumbers)
-        val bonus = Bonus(lotto, bonusNumber)
+    private fun calculateRank(tickets: Tickets, lotto: Lotto, bonus: Bonus): Rank {
         val rank = Rank(lotto, bonus)
-        rank.calculateRank(lottoTickets)
+        val ticketsDTO = tickets.convertToTicketsDTO()
+        rank.calculateRank(ticketsDTO.lottoTickets)
         return rank
     }
 
-    private fun printStatistics(rank: Rank) {
-        OutputView.printStatistics(rank.rankList)
+    private fun showStatistics(rank: Rank) {
+        val rankDTO = rank.convertToRankDTO()
+        OutputView.printStatistics(rankDTO.rankList)
     }
 
-    private fun printEarningsRate(rank: Rank, purchaseAmount: Int) {
-        val prize = Prize(rank)
-        val prizeRate = prize.getRate(prize.getPrizeMoney(), purchaseAmount)
+    private fun showEarningsRate(rank: Rank, purchase: Purchase) {
+        val prize = Prize(rank, purchase)
+        val prizeRate = prize.getRate(prize.getPrizeMoney())
         OutputView.printEarningsRate(prizeRate)
     }
-
 }

@@ -1,7 +1,8 @@
 package lotto.model
 
 class Prize(
-    private val rank: Rank
+    private val rank: Rank,
+    private val purchase: Purchase
 ) {
     companion object {
         private const val PRIZE_1ST = 2_000_000_000
@@ -18,8 +19,8 @@ class Prize(
                 rank.rankList[2] * PRIZE_3RD + rank.rankList[3] * PRIZE_4TH + rank.rankList[4] * PRIZE_5TH
     }
 
-    fun getRate(prizeMoney: Int, amount: Int): String {
-        val rate = (prizeMoney.toDouble() / amount.toDouble()) * PERCENT
+    fun getRate(prizeMoney: Int): String {
+        val rate = (prizeMoney.toDouble() / purchase.amount.toDouble()) * PERCENT
         return String.format("%.1f", rate)
     }
 }

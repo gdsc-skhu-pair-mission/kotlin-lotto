@@ -1,6 +1,7 @@
 package lotto.model
 
 import camp.nextstep.edu.missionutils.Randoms
+import lotto.dto.TicketsDTO
 
 class Tickets(private val purchase: Purchase) {
     companion object {
@@ -9,24 +10,22 @@ class Tickets(private val purchase: Purchase) {
         private const val LOTTO_SIZE = 6
     }
 
-    private var _lottoTickets: MutableList<List<Int>> = mutableListOf()
+    private val _lottoTickets: List<List<Int>> = generateTickets()
 
     val lottoTickets: List<List<Int>>
-        get() = _lottoTickets.toList()
+        get() = _lottoTickets
 
-    fun generateTickets(): List<List<Int>> {
-        repeat(purchase.calculatePurchaseCount()) {
-            val ticket = generateLottoNumbers()
-            addTicket(ticket)
+    fun convertToTicketsDTO(): TicketsDTO {
+        return TicketsDTO(lottoTickets)
+    }
+
+    private fun generateTickets(): List<List<Int>> {
+        return List(purchase.calculatePurchaseCount()) {
+            generateLottoNumbers()
         }
-        return lottoTickets
     }
 
     private fun generateLottoNumbers(): List<Int> {
         return Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_SIZE).sorted()
-    }
-
-    private fun addTicket(ticket: List<Int>) {
-        _lottoTickets.add(ticket)
     }
 }
