@@ -10,9 +10,10 @@ import org.junit.jupiter.api.Assertions.assertTrue
 
 class TicketsTest {
     private val purchase = Purchase(3000)
+    private val quantity = purchase.purchaseAmount()
     private val ticket = Ticket()
     private val ticketController = TicketController()
-    private val ticketsList = ticketController.generateTickets(purchase)
+    private val ticketsList = ticketController.generateTickets(quantity)
 
     @Test
     @DisplayName("각 로또의 로또 번호는 6개씩 생성되어야 한다.")

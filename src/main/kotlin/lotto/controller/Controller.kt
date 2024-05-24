@@ -3,52 +3,18 @@ package lotto.controller
 import lotto.model.*
 import lotto.view.InputView
 import lotto.view.OutputView
-import lotto.view.OutputView.printPurchaseCountMessage
-import lotto.view.OutputView.printTicketMessage
 
 class Controller {
     private val ticketController = TicketController()
-    private val purchaseAmount = inputPurchaseAmount()
+    private val tickets = ticketController.handleTicketPurchase()
+
     fun start() {
-        purchaseController()
-        inputWinningNumberCountroller()
-    }
-
-    fun purchaseController() : List<List<Int>> {
-        val purchaseAmount = purchaseAmount
-        val tickets =  generateLottoTickets(purchaseAmount)
-        return tickets
-    }
-
-    fun inputWinningNumberCountroller() {
+        tickets
         val winningNumbers = inputWinningNumbers()
         val bonusNumber = inputBonusNumber()
-        rankController(purchaseController(), winningNumbers, bonusNumber )
-    }
-
-    fun rankController(tickets : List<List<Int>>, winningNumbers: List<Int>, bonusNumber: Int) {
         val rank = calculateRank(tickets, winningNumbers, bonusNumber)
         printStatistics(rank)
-        printEarningsRate(rank, purchaseAmount)
-    }
-
-    private fun inputPurchaseAmount(): Int {
-        while (true) {
-            try {
-                OutputView.printAmountMessage()
-                return InputView.getInteger()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
-    }
-
-    private fun generateLottoTickets(purchaseAmount: Int): List<List<Int>> {
-        val purchase = Purchase(purchaseAmount)
-        printPurchaseCountMessage(purchase.calculatePurchaseCount())
-        val tickets = ticketController.generateTickets(purchase)
-        printTicketMessage(ticketController.tickets)
-        return tickets
+        printEarningsRate(rank, ticketController.purchaseAmout)
     }
 
     private fun inputWinningNumbers(): List<Int> {
@@ -85,9 +51,9 @@ class Controller {
         OutputView.printStatistics(rank.rankList)
     }
 
-    private fun printEarningsRate(rank: Rank, purchaseAmount: Int) {
+    private fun printEarningsRate(rank: Rank, purchaseAmount: Int?) {
         val prize = Prize(rank)
-        val prizeRate = prize.getRate(prize.getPrizeMoney(), purchaseAmount)
+        val prizeRate = prize.getRate(prize.getPrizeMoney(), purchaseAmount!!)
         OutputView.printEarningsRate(prizeRate)
     }
 }

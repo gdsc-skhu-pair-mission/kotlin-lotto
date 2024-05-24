@@ -3,7 +3,7 @@ package lotto.model
 import lotto.util.Validator.validateBonusRange
 import lotto.util.Validator.validateLottoBonusDuplicate
 
-class Bonus (
+class Bonus(
     private val lotto: Lotto,
     private val _bonusNumber: Int
 ) {

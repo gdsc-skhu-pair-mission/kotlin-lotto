@@ -18,8 +18,8 @@ object Validator {
         }
     }
 
-    fun validateNatural(input: String){
-        require(input.trim().toInt() > 0){
+    fun validateNatural(input: String) {
+        require(input.trim().toInt() > 0) {
             ErrorMessage.NUMBER_NATURAL.getMessage()
         }
     }
@@ -34,7 +34,7 @@ object Validator {
         input.forEach { validateRange(it) }
     }
 
-    fun validateBonusRange(input: Int){
+    fun validateBonusRange(input: Int) {
         validateRange(input)
     }
 
@@ -50,14 +50,14 @@ object Validator {
         }
     }
 
-    fun validateLottoDuplicate(input: List<Int>){
-        require(input.distinct().size == LOTTO_SIZE){
+    fun validateLottoDuplicate(input: List<Int>) {
+        require(input.distinct().size == LOTTO_SIZE) {
             ErrorMessage.LOTTO_DUPLICATE.getMessage()
         }
     }
 
-    fun validateLottoBonusDuplicate(numbers: List<Int>, bonus: Int){
-        require(!numbers.contains(bonus)){
+    fun validateLottoBonusDuplicate(numbers: List<Int>, bonus: Int) {
+        require(!numbers.contains(bonus)) {
             ErrorMessage.BONUS_DUPLICATE.getMessage()
         }
     }

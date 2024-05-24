@@ -14,21 +14,29 @@ import java.lang.IllegalArgumentException
 
 class PrizeTest {
 
-    lateinit var lotto :Lotto
-    lateinit var bonus:Bonus
-    val tickets =  listOf(listOf(1,2,3,7,8,9), listOf(1,2,3,4,10,11), listOf(11,12,13,14,15,16), listOf(17,18,19,20,21,22), listOf(23,24,25,26,27,28))
+    lateinit var lotto: Lotto
+    lateinit var bonus: Bonus
+    val tickets = listOf(
+        listOf(1, 2, 3, 7, 8, 9),
+        listOf(1, 2, 3, 4, 10, 11),
+        listOf(11, 12, 13, 14, 15, 16),
+        listOf(17, 18, 19, 20, 21, 22),
+        listOf(23, 24, 25, 26, 27, 28)
+    )
 
 
-    lateinit var rank:Rank
+    lateinit var rank: Rank
     lateinit var prize: Prize
+
     @BeforeEach
     fun setUp() {
-        lotto = Lotto(listOf(1,2,3,4,5,6))
+        lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
         bonus = Bonus(lotto, 7)
-        rank =  Rank(lotto, bonus)
+        rank = Rank(lotto, bonus)
         prize = Prize(rank)
 
     }
+
     @Test
     @DisplayName("당첨 순위에 따른 올바른 금액을 반환한다.")
     fun when_Given_Rank_Then_ReturnCorrectPrizeMoney() {
@@ -50,7 +58,7 @@ class PrizeTest {
 
     @Test
     @DisplayName("수익률은 0.0 이상이어야한다.")
-    fun should_ThrowException_When_CorrectRate(){
+    fun should_ThrowException_When_CorrectRate() {
         rank.calculateRank((tickets))
         val prizeMoney = prize.getPrizeMoney()
         val rate = prize.getRate(prizeMoney, 5000)

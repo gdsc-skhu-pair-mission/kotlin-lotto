@@ -2,7 +2,7 @@ package lotto.model
 
 class Rank(
     private val lotto: Lotto,
-    private val bonus: Bonus,
+    private val bonus: Bonus
 ) {
     private val _rankList: MutableList<Int> = MutableList(6) { 0 }
 
@@ -43,7 +43,8 @@ class Rank(
     }
 
     private fun countBonus(hasBonus: Boolean): Int {
-        if(hasBonus) return INDEX_2ND
+        if (hasBonus) return INDEX_2ND
         return INDEX_3RD
     }
+
 }
